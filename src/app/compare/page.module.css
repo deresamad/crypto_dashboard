@@ -1,0 +1,235 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.title {
+  color: #f39c12;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  color: #cccccc;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.searchSection {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 3rem 2rem;
+  color: #999999;
+  font-size: 1.1rem;
+}
+
+.comparisonSection {
+  margin-bottom: 3rem;
+}
+
+.sectionTitle {
+  color: #f39c12;
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.maxReached {
+  color: #e74c3c;
+  font-size: 0.9rem;
+  font-weight: 400;
+  margin-left: 0.5rem;
+}
+
+.comparisonTable {
+  background-color: #1a1a2e;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid #16213e;
+}
+
+.tableHeader {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+  background-color: #16213e;
+  font-weight: 600;
+  color: #f39c12;
+}
+
+.tableRow {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+  border-bottom: 1px solid #16213e;
+}
+
+.tableRow:last-child {
+  border-bottom: none;
+}
+
+.cell {
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.coinInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.coinIcon {
+  font-size: 1.5rem;
+}
+
+.coinName {
+  color: #ffffff;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.coinSymbol {
+  color: #999999;
+  font-size: 0.9rem;
+}
+
+.price {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.change {
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.change.positive {
+  color: #27ae60;
+  background-color: rgba(39, 174, 96, 0.1);
+}
+
+.change.negative {
+  color: #e74c3c;
+  background-color: rgba(231, 76, 60, 0.1);
+}
+
+.marketCap {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.removeButton {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.removeButton:hover {
+  background-color: #c0392b;
+}
+
+.availableCoins {
+  margin-top: 3rem;
+}
+
+.coinsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.coinCard {
+  background-color: #1a1a2e;
+  border: 2px solid #16213e;
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.coinCard:hover {
+  border-color: #f39c12;
+  transform: translateY(-2px);
+}
+
+.coinCardHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.coinCardPrice {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.addButton {
+  width: 100%;
+  background-color: #f39c12;
+  color: #1a1a2e;
+  border: none;
+  padding: 0.75rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.addButton:hover:not(:disabled) {
+  background-color: #e67e22;
+}
+
+.addButton:disabled {
+  background-color: #666666;
+  color: #999999;
+  cursor: not-allowed;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+  
+  .title {
+    font-size: 2rem;
+  }
+  
+  .comparisonTable {
+    overflow-x: auto;
+  }
+  
+  .tableHeader,
+  .tableRow {
+    min-width: 600px;
+  }
+  
+  .coinsGrid {
+    grid-template-columns: 1fr;
+  }
+}

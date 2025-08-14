@@ -1,0 +1,152 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.title {
+  color: #f39c12;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  color: #cccccc;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto 2rem auto;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.count {
+  color: #999999;
+  font-size: 0.95rem;
+}
+
+.clearButton {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.clearButton:hover {
+  background-color: #c0392b;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #cccccc;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.emptyIcon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  opacity: 0.3;
+}
+
+.emptyState h2 {
+  color: #f39c12;
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+}
+
+.emptyState p {
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.homeLink {
+  display: inline-block;
+  background-color: #f39c12;
+  color: #1a1a2e;
+  text-decoration: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.homeLink:hover {
+  background-color: #e67e22;
+}
+
+.info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 4rem;
+  padding-top: 3rem;
+  border-top: 2px solid #16213e;
+}
+
+.infoCard {
+  background-color: #1a1a2e;
+  border: 2px solid #16213e;
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.infoCard:hover {
+  border-color: #f39c12;
+  transform: translateY(-2px);
+}
+
+.infoCard h3 {
+  color: #f39c12;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.infoCard p {
+  color: #cccccc;
+  line-height: 1.6;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+  
+  .title {
+    font-size: 2rem;
+  }
+  
+  .actions {
+    gap: 1rem;
+  }
+  
+  .info {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .infoCard {
+    padding: 1.5rem;
+  }
+}
