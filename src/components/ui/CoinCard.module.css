@@ -1,6 +1,6 @@
 .card {
-  background-color: #1a1a2e;
-  border: 2px solid #16213e;
+  background-color: var(--card-bg);
+  border: 2px solid var(--border-color);
   border-radius: 12px;
   padding: 1.5rem;
   transition: all 0.3s ease;
@@ -8,9 +8,9 @@
 }
 
 .card:hover {
-  border-color: #f39c12;
+  border-color: var(--accent-color);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(243, 156, 18, 0.1);
+  box-shadow: 0 4px 12px var(--card-hover-bg);
 }
 
 .header {
@@ -31,14 +31,14 @@
 }
 
 .coinName {
-  color: #ffffff;
+  color: var(--text-primary);
   font-size: 1.1rem;
   font-weight: 600;
   margin: 0 0 0.25rem 0;
 }
 
 .coinSymbol {
-  color: #999999;
+  color: var(--text-muted);
   font-size: 0.9rem;
   font-weight: 500;
 }
@@ -48,17 +48,17 @@
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
-  color: #666666;
+  color: var(--text-muted);
   transition: color 0.3s ease;
   padding: 0.25rem;
 }
 
 .favoriteButton:hover {
-  color: #f39c12;
+  color: var(--accent-color);
 }
 
 .favoriteButton.favorite {
-  color: #f39c12;
+  color: var(--accent-color);
 }
 
 .priceSection {
@@ -68,7 +68,7 @@
 .currentPrice {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #ffffff;
+  color: var(--text-primary);
   margin-bottom: 0.5rem;
 }
 
@@ -81,13 +81,13 @@
 }
 
 .priceChange.positive {
-  color: #27ae60;
-  background-color: rgba(39, 174, 96, 0.1);
+  color: var(--positive-color);
+  background-color: var(--positive-bg);
 }
 
 .priceChange.negative {
-  color: #e74c3c;
-  background-color: rgba(231, 76, 60, 0.1);
+  color: var(--negative-color);
+  background-color: var(--negative-bg);
 }
 
 .marketCap {
@@ -95,16 +95,16 @@
   justify-content: space-between;
   align-items: center;
   padding-top: 1rem;
-  border-top: 1px solid #16213e;
+  border-top: 1px solid var(--border-color);
 }
 
 .label {
-  color: #999999;
+  color: var(--text-muted);
   font-size: 0.9rem;
 }
 
 .value {
-  color: #ffffff;
+  color: var(--text-primary);
   font-weight: 600;
 }
 

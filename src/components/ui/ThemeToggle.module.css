@@ -1,0 +1,51 @@
+.toggle {
+  background: none;
+  border: 2px solid var(--border-color);
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  background-color: var(--card-bg);
+}
+
+.toggle:hover {
+  border-color: var(--accent-color);
+  background-color: var(--card-hover-bg);
+  transform: scale(1.05);
+}
+
+.toggle:active {
+  transform: scale(0.95);
+}
+
+.icon {
+  font-size: 1.2rem;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.toggle:hover .icon {
+  transform: rotate(20deg);
+}
+
+/* Focus styles for accessibility */
+.toggle:focus {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .toggle {
+    width: 38px;
+    height: 38px;
+  }
+  
+  .icon {
+    font-size: 1.1rem;
+  }
+}

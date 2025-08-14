@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Layout from "@/components/layout/Layout";
+import { ThemeProvider } from "@/contexts/ThemeContext";
 
 export const metadata: Metadata = {
   title: "Crypto Dashboard",
@@ -15,9 +16,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased">
-        <Layout>
-          {children}
-        </Layout>
+        <ThemeProvider>
+          <Layout>
+            {children}
+          </Layout>
+        </ThemeProvider>
       </body>
     </html>
   );
