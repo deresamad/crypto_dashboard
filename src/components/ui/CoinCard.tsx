@@ -26,7 +26,23 @@ export default function CoinCard({ coin, onToggleFavorite, isFavorite = false }:
     >
       <div className={styles.header}>
         <div className={styles.coinInfo}>
-          <span className={styles.coinIcon}>{coin.image}</span>
+          <div className={styles.coinIconContainer}>
+            <img 
+              src={coin.image} 
+              alt={coin.name}
+              className={styles.coinImage}
+              onError={(e) => {
+                // Fallback to emoji if image fails to load
+                const target = e.target as HTMLImageElement;
+                target.style.display = 'none';
+                const fallback = target.nextElementSibling as HTMLElement;
+                if (fallback) {
+                  fallback.style.display = 'block';
+                }
+              }}
+            />
+            <span className={styles.coinEmoji}>🪙</span>
+          </div>
           <div>
             <h3 className={styles.coinName}>{coin.name}</h3>
             <span className={styles.coinSymbol}>{coin.symbol.toUpperCase()}</span>

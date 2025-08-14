@@ -1,15 +1,17 @@
 'use client';
 
 import { useState } from 'react';
-import { mockCryptoData, CryptoCoin, formatPrice, formatPercentage, formatMarketCap } from '@/utils/mockData';
+import { CryptoCoin, formatPrice, formatPercentage, formatMarketCap } from '@/utils/mockData';
+import { useCryptoData } from '@/hooks/useCryptoData';
 import SearchBar from '@/components/ui/SearchBar';
 import styles from './page.module.css';
 
 export default function Compare() {
   const [selectedCoins, setSelectedCoins] = useState<CryptoCoin[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
+  const { data: cryptoData, loading, error, refetch } = useCryptoData(100); // Fetch more coins for comparison
 
-  const filteredCoins = mockCryptoData.filter(coin => 
+  const filteredCoins = cryptoData.filter(coin => 
     coin.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     coin.symbol.toLowerCase().includes(searchTerm.toLowerCase())
   ).filter(coin => !selectedCoins.some(selected => selected.id === coin.id));
@@ -31,6 +33,14 @@ export default function Compare() {
         <p className={styles.subtitle}>
           Select up to 4 cryptocurrencies to compare their prices, market caps, and performance.
         </p>
+        {error && (
+          <div className={styles.errorBanner}>
+            <p>⚠️ {error}</p>
+            <button onClick={refetch} className={styles.retryButton}>
+              Retry
+            </button>
+          </div>
+        )}
       </div>
 
       <div className={styles.searchSection}>
@@ -62,7 +72,24 @@ export default function Compare() {
               <div key={coin.id} className={styles.tableRow}>
                 <div className={styles.cell}>
                   <div className={styles.coinInfo}>
-                    <span className={styles.coinIcon}>{coin.image}</span>
+                    <img 
+                      src={coin.image} 
+                      alt={coin.name}
+                      className={styles.coinImage}
+                      onError={(e) => {
+                        // Fallback to emoji if image fails to load
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                        const parent = target.parentElement!;
+                        if (!parent.querySelector('.fallbackEmoji')) {
+                          const emoji = document.createElement('span');
+                          emoji.className = 'fallbackEmoji';
+                          emoji.textContent = '🪙';
+                          emoji.style.fontSize = '2rem';
+                          parent.appendChild(emoji);
+                        }
+                      }}
+                    />
                     <div>
                       <div className={styles.coinName}>{coin.name}</div>
                       <div className={styles.coinSymbol}>{coin.symbol.toUpperCase()}</div>
@@ -97,38 +124,62 @@ export default function Compare() {
 
       <div className={styles.availableCoins}>
         <h2 className={styles.sectionTitle}>
-          Available Cryptocurrencies
+          {loading ? 'Loading Available Cryptocurrencies...' : 'Available Cryptocurrencies'}
           {selectedCoins.length >= 4 && (
             <span className={styles.maxReached}>(Maximum reached - remove coins to add more)</span>
           )}
         </h2>
         
-        <div className={styles.coinsGrid}>
-          {filteredCoins.map((coin) => (
-            <div key={coin.id} className={styles.coinCard}>
-              <div className={styles.coinCardHeader}>
-                <span className={styles.coinIcon}>{coin.image}</span>
-                <div>
-                  <h3 className={styles.coinName}>{coin.name}</h3>
-                  <span className={styles.coinSymbol}>{coin.symbol.toUpperCase()}</span>
+        {loading ? (
+          <div className={styles.loadingContainer}>
+            <div className={styles.spinner}></div>
+            <p>Loading cryptocurrency data...</p>
+          </div>
+        ) : (
+          <div className={styles.coinsGrid}>
+            {filteredCoins.map((coin) => (
+              <div key={coin.id} className={styles.coinCard}>
+                <div className={styles.coinCardHeader}>
+                  <img 
+                    src={coin.image} 
+                    alt={coin.name}
+                    className={styles.coinImage}
+                    onError={(e) => {
+                      // Fallback to emoji if image fails to load
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const parent = target.parentElement!;
+                      if (!parent.querySelector('.fallbackEmoji')) {
+                        const emoji = document.createElement('span');
+                        emoji.className = 'fallbackEmoji';
+                        emoji.textContent = '🪙';
+                        emoji.style.fontSize = '2rem';
+                        parent.appendChild(emoji);
+                      }
+                    }}
+                  />
+                  <div>
+                    <h3 className={styles.coinName}>{coin.name}</h3>
+                    <span className={styles.coinSymbol}>{coin.symbol.toUpperCase()}</span>
+                  </div>
                 </div>
+                
+                <div className={styles.coinCardPrice}>
+                  {formatPrice(coin.current_price)}
+                </div>
+                
+                <button
+                  onClick={() => addCoinToCompare(coin)}
+                  disabled={selectedCoins.length >= 4}
+                  className={styles.addButton}
+                  aria-label={`Add ${coin.name} to comparison`}
+                >
+                  {selectedCoins.length >= 4 ? 'Max Reached' : 'Add to Compare'}
+                </button>
               </div>
-              
-              <div className={styles.coinCardPrice}>
-                {formatPrice(coin.current_price)}
-              </div>
-              
-              <button
-                onClick={() => addCoinToCompare(coin)}
-                disabled={selectedCoins.length >= 4}
-                className={styles.addButton}
-                aria-label={`Add ${coin.name} to comparison`}
-              >
-                {selectedCoins.length >= 4 ? 'Max Reached' : 'Add to Compare'}
-              </button>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
