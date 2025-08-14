@@ -30,6 +30,26 @@
   font-size: 2rem;
 }
 
+.coinIconContainer {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.coinImage {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.coinEmoji {
+  font-size: 2rem;
+  display: none; /* Hidden by default, shown when image fails */
+}
+
 .coinName {
   color: #ffffff;
   font-size: 1.1rem;

@@ -28,6 +28,39 @@
   line-height: 1.6;
 }
 
+.errorBanner {
+  background-color: rgba(231, 76, 60, 0.1);
+  border: 1px solid rgba(231, 76, 60, 0.3);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.errorBanner p {
+  color: #e74c3c;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.retryButton {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+.retryButton:hover {
+  background-color: #c0392b;
+}
+
 /* Mobile responsive */
 @media (max-width: 768px) {
   .hero {
@@ -40,6 +73,11 @@
   
   .subtitle {
     font-size: 1.1rem;
+  }
+
+  .errorBanner {
+    flex-direction: column;
+    text-align: center;
   }
 }
 

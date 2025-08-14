@@ -12,6 +12,7 @@ interface PriceListProps {
   onToggleFavorite: (coinId: string) => void;
   showSearch?: boolean;
   title?: string;
+  loading?: boolean;
 }
 
 export default function PriceList({ 
@@ -19,7 +20,8 @@ export default function PriceList({
   favorites = [], 
   onToggleFavorite, 
   showSearch = true,
-  title = "Cryptocurrency Prices"
+  title = "Cryptocurrency Prices",
+  loading = false
 }: PriceListProps) {
   const [searchTerm, setSearchTerm] = useState<string>('');
 
@@ -31,6 +33,18 @@ export default function PriceList({
       coin.symbol.toLowerCase().includes(searchTerm.toLowerCase())
     );
   }, [coins, searchTerm]);
+
+  if (loading) {
+    return (
+      <div className={styles.container}>
+        <h2 className={styles.title}>{title}</h2>
+        <div className={styles.loadingContainer}>
+          <div className={styles.spinner}></div>
+          <p className={styles.loadingText}>Loading cryptocurrency data...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.container}>

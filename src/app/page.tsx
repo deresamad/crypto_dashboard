@@ -2,11 +2,12 @@
 
 import { useState } from 'react';
 import PriceList from '@/components/ui/PriceList';
-import { mockCryptoData } from '@/utils/mockData';
+import { useCryptoData } from '@/hooks/useCryptoData';
 import styles from './page.module.css';
 
 export default function Home() {
   const [favorites, setFavorites] = useState<string[]>([]);
+  const { data: cryptoData, loading, error, refetch } = useCryptoData(20);
 
   const handleToggleFavorite = (coinId: string) => {
     setFavorites(prevFavorites => {
@@ -25,13 +26,22 @@ export default function Home() {
         <p className={styles.subtitle}>
           Track real-time cryptocurrency prices and market data
         </p>
+        {error && (
+          <div className={styles.errorBanner}>
+            <p>⚠️ {error}</p>
+            <button onClick={refetch} className={styles.retryButton}>
+              Retry
+            </button>
+          </div>
+        )}
       </div>
       
       <PriceList
-        coins={mockCryptoData}
+        coins={cryptoData}
         favorites={favorites}
         onToggleFavorite={handleToggleFavorite}
-        title="Live Cryptocurrency Prices"
+        title={loading ? "Loading Cryptocurrency Prices..." : "Live Cryptocurrency Prices"}
+        loading={loading}
       />
     </div>
   );
