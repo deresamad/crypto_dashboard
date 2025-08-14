@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState, memo } from 'react';
 import styles from './SearchBar.module.css';
 
 interface SearchBarProps {
@@ -8,19 +8,19 @@ interface SearchBarProps {
   placeholder?: string;
 }
 
-export default function SearchBar({ onSearch, placeholder = "Search cryptocurrencies..." }: SearchBarProps) {
+const SearchBar = memo(function SearchBar({ onSearch, placeholder = "Search cryptocurrencies..." }: SearchBarProps) {
   const [searchTerm, setSearchTerm] = useState<string>('');
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setSearchTerm(value);
     onSearch(value);
-  };
+  }, [onSearch]);
 
-  const clearSearch = () => {
+  const clearSearch = React.useCallback(() => {
     setSearchTerm('');
     onSearch('');
-  };
+  }, [onSearch]);
 
   return (
     <div className={styles.searchContainer}>
@@ -45,4 +45,6 @@ export default function SearchBar({ onSearch, placeholder = "Search cryptocurren
       </div>
     </div>
   );
-}
+});
+
+export default SearchBar;

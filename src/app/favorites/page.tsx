@@ -1,47 +1,16 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { mockCryptoData } from '@/utils/mockData';
+import { useFavorites } from '@/contexts/FavoritesContext';
 import PriceList from '@/components/ui/PriceList';
+import PortfolioSummary from '@/components/ui/PortfolioSummary';
 import styles from './page.module.css';
 
 export default function Favorites() {
-  const [favorites, setFavorites] = useState<string[]>([]);
-
-  // Load favorites from localStorage on component mount
-  useEffect(() => {
-    const savedFavorites = localStorage.getItem('cryptoFavorites');
-    if (savedFavorites) {
-      try {
-        setFavorites(JSON.parse(savedFavorites));
-      } catch (error) {
-        // Reset favorites on localStorage parsing error
-        setFavorites([]);
-      }
-    }
-  }, []);
-
-  // Save favorites to localStorage whenever favorites change
-  useEffect(() => {
-    localStorage.setItem('cryptoFavorites', JSON.stringify(favorites));
-  }, [favorites]);
-
-  const handleToggleFavorite = (coinId: string) => {
-    setFavorites(prevFavorites => {
-      if (prevFavorites.includes(coinId)) {
-        return prevFavorites.filter(id => id !== coinId);
-      } else {
-        return [...prevFavorites, coinId];
-      }
-    });
-  };
+  const { favorites, toggleFavorite, clearAllFavorites } = useFavorites();
 
   const favoriteCoins = mockCryptoData.filter(coin => favorites.includes(coin.id));
-
-  const clearAllFavorites = () => {
-    setFavorites([]);
-  };
 
   return (
     <div className={styles.container}>
@@ -67,6 +36,8 @@ export default function Favorites() {
         )}
       </div>
 
+      <PortfolioSummary />
+
       {favorites.length === 0 ? (
         <div className={styles.emptyState}>
           <div className={styles.emptyIcon}>⭐</div>
@@ -83,7 +54,7 @@ export default function Favorites() {
         <PriceList
           coins={favoriteCoins}
           favorites={favorites}
-          onToggleFavorite={handleToggleFavorite}
+          onToggleFavorite={toggleFavorite}
           showSearch={true}
           title="Your Favorite Cryptocurrencies"
         />

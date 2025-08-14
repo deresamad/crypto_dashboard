@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import ErrorBoundary from '@/components/ui/ErrorBoundary';
 import styles from './Layout.module.css';
 
 interface LayoutProps {
@@ -12,7 +13,9 @@ export default function Layout({ children }: LayoutProps) {
     <div className={styles.layout}>
       <Navbar />
       <main className={styles.main}>
-        {children}
+        <ErrorBoundary>
+          {children}
+        </ErrorBoundary>
       </main>
       <Footer />
     </div>
