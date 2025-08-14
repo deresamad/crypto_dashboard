@@ -16,7 +16,8 @@ export default function Favorites() {
       try {
         setFavorites(JSON.parse(savedFavorites));
       } catch (error) {
-        console.error('Error parsing favorites from localStorage:', error);
+        // Reset favorites on localStorage parsing error
+        setFavorites([]);
       }
     }
   }, []);
