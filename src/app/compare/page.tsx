@@ -1,10 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, Suspense, lazy } from 'react';
 import { mockCryptoData, CryptoCoin, formatPrice, formatPercentage, formatMarketCap } from '@/utils/mockData';
 import { useFavorites } from '@/contexts/FavoritesContext';
-import SearchBar from '@/components/ui/SearchBar';
+import Loading from '@/components/ui/Loading';
 import styles from './page.module.css';
+
+// Lazy load the SearchBar component
+const LazySearchBar = lazy(() => import('@/components/ui/SearchBar'));
 
 export default function Compare() {
   const [selectedCoins, setSelectedCoins] = useState<CryptoCoin[]>([]);
@@ -36,10 +39,12 @@ export default function Compare() {
       </div>
 
       <div className={styles.searchSection}>
-        <SearchBar 
-          onSearch={setSearchTerm}
-          placeholder="Search for cryptocurrencies to compare..."
-        />
+        <Suspense fallback={<Loading text="Loading search..." />}>
+          <LazySearchBar
+            onSearch={setSearchTerm}
+            placeholder="Search for cryptocurrencies to compare..."
+          />
+        </Suspense>
       </div>
 
       {selectedCoins.length === 0 && (

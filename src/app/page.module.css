@@ -24,8 +24,20 @@
 .subtitle {
   font-size: 1.25rem;
   color: #cccccc;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
   line-height: 1.6;
+}
+
+.favoritesSummary {
+  display: inline-block;
+  background-color: rgba(243, 156, 18, 0.1);
+  color: #f39c12;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  border: 1px solid rgba(243, 156, 18, 0.3);
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
 }
 
 /* Mobile responsive */
