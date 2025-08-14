@@ -77,7 +77,7 @@ export default function About() {
               <strong>State Management:</strong> React Hooks (useState, useEffect)
             </div>
             <div className={styles.techItem}>
-              <strong>Data:</strong> Mock cryptocurrency data for demonstration
+              <strong>Data:</strong> Real-time cryptocurrency data from CoinGecko API
             </div>
           </div>
         </div>
@@ -112,11 +112,11 @@ export default function About() {
         </div>
 
         <div className={styles.disclaimer}>
-          <h3>⚠️ Important Disclaimer</h3>
+          <h3>⚠️ Important Notice</h3>
           <p>
-            This application uses mock data for demonstration purposes only. 
-            The prices and market data displayed are not real and should not be used for actual trading decisions. 
-            For real cryptocurrency trading, please use official exchanges and verified market data sources.
+            This application uses real cryptocurrency data from the CoinGecko API.
+            While we strive to provide accurate and up-to-date information, cryptocurrency markets are volatile.
+            Please use the data as reference only and consult multiple sources before making investment decisions.
           </p>
         </div>
       </div>
