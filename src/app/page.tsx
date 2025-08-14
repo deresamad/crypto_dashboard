@@ -1,22 +1,12 @@
 'use client';
 
-import { useState } from 'react';
 import PriceList from '@/components/ui/PriceList';
 import { mockCryptoData } from '@/utils/mockData';
+import { useFavorites } from '@/contexts/FavoritesContext';
 import styles from './page.module.css';
 
 export default function Home() {
-  const [favorites, setFavorites] = useState<string[]>([]);
-
-  const handleToggleFavorite = (coinId: string) => {
-    setFavorites(prevFavorites => {
-      if (prevFavorites.includes(coinId)) {
-        return prevFavorites.filter(id => id !== coinId);
-      } else {
-        return [...prevFavorites, coinId];
-      }
-    });
-  };
+  const { favorites, toggleFavorite } = useFavorites();
 
   return (
     <div className={styles.container}>
@@ -30,7 +20,7 @@ export default function Home() {
       <PriceList
         coins={mockCryptoData}
         favorites={favorites}
-        onToggleFavorite={handleToggleFavorite}
+        onToggleFavorite={toggleFavorite}
         title="Live Cryptocurrency Prices"
       />
     </div>

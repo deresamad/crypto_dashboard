@@ -177,8 +177,28 @@
 .coinCardHeader {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 0.75rem;
   margin-bottom: 1rem;
+}
+
+.coinCardHeader > div {
+  flex: 1;
+}
+
+.favoriteButton {
+  background: none;
+  border: none;
+  color: #f39c12;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.favoriteButton:hover {
+  background-color: rgba(243, 156, 18, 0.1);
 }
 
 .coinCardPrice {

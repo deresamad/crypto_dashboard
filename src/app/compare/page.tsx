@@ -2,12 +2,14 @@
 
 import { useState } from 'react';
 import { mockCryptoData, CryptoCoin, formatPrice, formatPercentage, formatMarketCap } from '@/utils/mockData';
+import { useFavorites } from '@/contexts/FavoritesContext';
 import SearchBar from '@/components/ui/SearchBar';
 import styles from './page.module.css';
 
 export default function Compare() {
   const [selectedCoins, setSelectedCoins] = useState<CryptoCoin[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
+  const { favorites, toggleFavorite } = useFavorites();
 
   const filteredCoins = mockCryptoData.filter(coin => 
     coin.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -112,6 +114,13 @@ export default function Compare() {
                   <h3 className={styles.coinName}>{coin.name}</h3>
                   <span className={styles.coinSymbol}>{coin.symbol.toUpperCase()}</span>
                 </div>
+                <button
+                  onClick={() => toggleFavorite(coin.id)}
+                  className={styles.favoriteButton}
+                  aria-label={`${favorites.includes(coin.id) ? 'Remove from' : 'Add to'} favorites`}
+                >
+                  {favorites.includes(coin.id) ? '★' : '☆'}
+                </button>
               </div>
               
               <div className={styles.coinCardPrice}>
