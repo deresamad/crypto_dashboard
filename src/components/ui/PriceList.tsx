@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import React, { useMemo, memo } from 'react';
 import CoinCard from './CoinCard';
 import SearchBar from './SearchBar';
 import { CryptoCoin } from '@/utils/mockData';
@@ -14,23 +14,28 @@ interface PriceListProps {
   title?: string;
 }
 
-export default function PriceList({ 
+const PriceList = memo(function PriceList({ 
   coins, 
   favorites = [], 
   onToggleFavorite, 
   showSearch = true,
   title = "Cryptocurrency Prices"
 }: PriceListProps) {
-  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [searchTerm, setSearchTerm] = React.useState<string>('');
 
   const filteredCoins = useMemo(() => {
     if (!searchTerm) return coins;
     
+    const searchLower = searchTerm.toLowerCase();
     return coins.filter(coin => 
-      coin.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      coin.symbol.toLowerCase().includes(searchTerm.toLowerCase())
+      coin.name.toLowerCase().includes(searchLower) ||
+      coin.symbol.toLowerCase().includes(searchLower)
     );
   }, [coins, searchTerm]);
+
+  const handleSearch = React.useCallback((term: string) => {
+    setSearchTerm(term);
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -38,7 +43,7 @@ export default function PriceList({
       
       {showSearch && (
         <SearchBar 
-          onSearch={setSearchTerm}
+          onSearch={handleSearch}
           placeholder="Search cryptocurrencies..."
         />
       )}
@@ -61,4 +66,6 @@ export default function PriceList({
       )}
     </div>
   );
-}
+});
+
+export default PriceList;

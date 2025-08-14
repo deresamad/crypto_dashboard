@@ -1,5 +1,6 @@
 'use client';
 
+import React, { memo } from 'react';
 import { formatPrice, formatMarketCap, formatPercentage, CryptoCoin } from '@/utils/mockData';
 import styles from './CoinCard.module.css';
 
@@ -9,8 +10,12 @@ interface CoinCardProps {
   isFavorite?: boolean;
 }
 
-export default function CoinCard({ coin, onToggleFavorite, isFavorite = false }: CoinCardProps) {
+const CoinCard = memo(function CoinCard({ coin, onToggleFavorite, isFavorite = false }: CoinCardProps) {
   const isPositive = coin.price_change_percentage_24h >= 0;
+
+  const handleToggleFavorite = React.useCallback(() => {
+    onToggleFavorite(coin.id);
+  }, [coin.id, onToggleFavorite]);
 
   return (
     <div className={styles.card}>
@@ -24,7 +29,7 @@ export default function CoinCard({ coin, onToggleFavorite, isFavorite = false }:
         </div>
         
         <button
-          onClick={() => onToggleFavorite(coin.id)}
+          onClick={handleToggleFavorite}
           className={`${styles.favoriteButton} ${isFavorite ? styles.favorite : ''}`}
           aria-label={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
         >
@@ -48,4 +53,6 @@ export default function CoinCard({ coin, onToggleFavorite, isFavorite = false }:
       </div>
     </div>
   );
-}
+});
+
+export default CoinCard;

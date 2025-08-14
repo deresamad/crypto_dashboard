@@ -1,0 +1,109 @@
+.errorContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  padding: 2rem;
+  background-color: #0f0f23;
+  border-radius: 12px;
+  border: 2px solid #16213e;
+}
+
+.errorContent {
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+}
+
+.errorIcon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.errorTitle {
+  color: #ffffff;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.errorMessage {
+  color: #cccccc;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.refreshButton {
+  background-color: #f39c12;
+  color: #ffffff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.refreshButton:hover {
+  background-color: #e67e22;
+  transform: translateY(-1px);
+}
+
+.refreshButton:active {
+  transform: translateY(0);
+}
+
+.errorDetails {
+  margin-top: 2rem;
+  text-align: left;
+  background-color: #1a1a2e;
+  border-radius: 8px;
+  border: 1px solid #16213e;
+}
+
+.errorDetails summary {
+  padding: 1rem;
+  color: #f39c12;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.errorDetails summary:hover {
+  background-color: rgba(243, 156, 18, 0.1);
+}
+
+.errorStack {
+  padding: 1rem;
+  background-color: #0f0f0f;
+  color: #ff6b6b;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin: 0;
+  border-top: 1px solid #16213e;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .errorContainer {
+    min-height: 300px;
+    padding: 1rem;
+  }
+  
+  .errorIcon {
+    font-size: 3rem;
+  }
+  
+  .errorTitle {
+    font-size: 1.25rem;
+  }
+  
+  .refreshButton {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.9rem;
+  }
+}
